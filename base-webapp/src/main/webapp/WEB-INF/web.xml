@@ -14,6 +14,15 @@
     <url-pattern>helloworld</url-pattern>
   </servlet-mapping>
 
+  <servlet>
+    <servlet-name>Main</servlet-name>
+    <servlet-class>store.Main</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Main</servlet-name>
+    <url-pattern>main</url-pattern>
+  </servlet-mapping>
+
   <context-param>
     <param-name>jdbcConnectionString</param-name>
     <param-value>jdbc:mysql://localhost:3306/javaee_test_db?createDatabaseIfNotExist=true&amp;
