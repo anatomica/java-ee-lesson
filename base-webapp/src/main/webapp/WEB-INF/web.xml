@@ -4,4 +4,29 @@
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
          version="4.0">
   <display-name>Archetype Created Web Application</display-name>
+
+  <servlet>
+    <servlet-name>HelloWorldServlet</servlet-name>
+    <servlet-class>ru.geekbrains.HelloWorldServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>HelloWorldServlet</servlet-name>
+    <url-pattern>helloworld</url-pattern>
+  </servlet-mapping>
+
+  <context-param>
+    <param-name>jdbcConnectionString</param-name>
+    <param-value>jdbc:mysql://localhost:3306/javaee_test_db?createDatabaseIfNotExist=true&amp;
+      allowPublicKeyRetrieval=true&amp;useSSL=false&amp;useUnicode=true&amp;
+      characterEncoding=UTF-8&amp;serverTimezone=UTC</param-value>
+  </context-param>
+  <context-param>
+    <param-name>dbUsername</param-name>
+    <param-value>root</param-value>
+  </context-param>
+  <context-param>
+    <param-name>dbPassword</param-name>
+    <param-value>root</param-value>
+  </context-param>
+
 </web-app>
