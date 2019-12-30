@@ -39,9 +39,10 @@ public class ContextListener implements ServletContextListener {
 
             if (catalogRepository.findAll().size() == 0) {
                 catalogRepository.insert(new Catalog(-1L, "Product1", "Desc1", new BigDecimal(10)));
-                catalogRepository.insert(new Catalog(-1L, "Product2", "Desc2", new BigDecimal(102)));
-                catalogRepository.insert(new Catalog(-1L, "Product3", "Desc3", new BigDecimal(1030)));
-                catalogRepository.insert(new Catalog(-1L, "Product4", "Desc4", new BigDecimal(140)));
+                catalogRepository.insert(new Catalog(-1L, "Product2", "Desc2", new BigDecimal(20)));
+                catalogRepository.insert(new Catalog(-1L, "Product3", "Desc3", new BigDecimal(30)));
+                catalogRepository.insert(new Catalog(-1L, "Product4", "Desc4", new BigDecimal(40)));
+                catalogRepository.insert(new Catalog(-1L, "Product5", "Desc5", new BigDecimal(50)));
             }
         } catch (SQLException ex) {
             logger.error("", ex);

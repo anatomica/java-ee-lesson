@@ -52,12 +52,22 @@ public class CatalogController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        if (req.getServletPath().equals("/update")) {
-            updateProduct(req, resp);
-        } else if (req.getServletPath().equals("/create")) {
-            createProduct(req, resp);
-        } else {
-            resp.setStatus(HttpServletResponse.SC_NOT_FOUND);
+        switch (req.getServletPath()) {
+            case "/create":
+                createProduct(req, resp);
+                break;
+            case "/update":
+                updateProduct(req, resp);
+                break;
+            case "/edit":
+                updateProduct(req, resp);
+                break;
+            case "/delete":
+                deleteProduct(req, resp);
+                break;
+            default:
+                resp.setStatus(HttpServletResponse.SC_NOT_FOUND);
+                break;
         }
     }
 
@@ -98,7 +108,11 @@ public class CatalogController extends HttpServlet {
     }
 
     private void deleteProduct(HttpServletRequest req, HttpServletResponse resp) {
-
+        try {
+            catalogRepository.delete(Long.parseLong(req.getParameter("id")));
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     private void showEditProductPage(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
