@@ -15,9 +15,9 @@ public class HeaderFooterFilter implements Filter {
     }
     @Override
     public void doFilter (ServletRequest req, ServletResponse resp, FilterChain chain) throws IOException, ServletException {
-        filterConfig.getServletContext().getRequestDispatcher( "/header.html" ).include(req, resp);
+        filterConfig.getServletContext().getRequestDispatcher( "/header.jsp" ).include(req, resp);
         chain.doFilter(req, resp);
-        filterConfig.getServletContext().getRequestDispatcher( "/footer.html" ).include(req, resp);
+        filterConfig.getServletContext().getRequestDispatcher( "/footer.jsp" ).include(req, resp);
     }
 
     @Override

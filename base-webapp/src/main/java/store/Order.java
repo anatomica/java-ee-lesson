@@ -12,7 +12,7 @@ public class Order extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        getServletContext().getRequestDispatcher("/order.html").include(req, resp);
+        getServletContext().getRequestDispatcher("/order.jsp").include(req, resp);
     }
 
 }
