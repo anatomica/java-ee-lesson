@@ -6,11 +6,19 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <div class="header">
+        <a href="main">Главная</a>
+        <a href="catalog">Каталог</a>
+        <a href="product">Товары</a>
+        <a href="order">Заказ</a>
+        <a href="cart">Корзина</a>
+    </div>
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"/>
+    <link rel="stylesheet" href="style.css">
     <title>EShop application</title>
 </head>
 
@@ -69,4 +77,9 @@
         crossorigin="anonymous"></script>
 
 </body>
+
+<div class="header">
+    Copyright &copy; 2019 Максим Фомин
+</div>
+
 </html>

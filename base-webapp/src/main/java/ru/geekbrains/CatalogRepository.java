@@ -1,20 +1,20 @@
 package ru.geekbrains;
 
-import store.Product;
+import store.Catalog;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProductRepository {
+public class CatalogRepository {
 
     private final Connection conn;
 
-    public ProductRepository(Connection conn) throws SQLException {
+    public CatalogRepository(Connection conn) throws SQLException {
         this.conn = conn;
         createTableIfNotExists(conn);
     }
 
-    public void insert(Product product) throws SQLException {
+    public void insert(Catalog product) throws SQLException {
         try (PreparedStatement stmt = conn.prepareStatement(
                 "insert into products(`name`, `description`, `price`) values (?, ?, ?);")) {
             stmt.setString(1, product.getName());
@@ -24,7 +24,7 @@ public class ProductRepository {
         }
     }
 
-    public void update(Product product) throws SQLException {
+    public void update(Catalog product) throws SQLException {
         try (PreparedStatement stmt = conn.prepareStatement(
                 "update products set `name` = ?, `description` = ?, `price` = ? where `id` = ?;")) {
             stmt.setString(1, product.getName());
@@ -43,26 +43,26 @@ public class ProductRepository {
         }
     }
 
-    public Product findById(long id) throws SQLException {
+    public Catalog findById(long id) throws SQLException {
         try (PreparedStatement stmt = conn.prepareStatement(
                 "select `id`, `name`, `description`, `price` from `products` where `id` = ?")) {
             stmt.setLong(1, id);
             ResultSet rs = stmt.executeQuery();
 
             if (rs.next()) {
-                return new Product(rs.getLong(1), rs.getString(2), rs.getString(3), rs.getBigDecimal(4));
+                return new Catalog(rs.getLong(1), rs.getString(2), rs.getString(3), rs.getBigDecimal(4));
             }
         }
-        return new Product(-1L, "", "", null);
+        return new Catalog(-1L, "", "", null);
     }
 
-    public List<Product> findAll() throws SQLException {
-        List<Product> res = new ArrayList<>();
+    public List<Catalog> findAll() throws SQLException {
+        List<Catalog> res = new ArrayList<>();
         try (Statement stmt = conn.createStatement()) {
             ResultSet rs = stmt.executeQuery("select `id`, `name`, `description`, `price` from `products`");
 
             while (rs.next()) {
-                res.add(new Product(rs.getLong(1), rs.getString(2), rs.getString(3), rs.getBigDecimal(4)));
+                res.add(new Catalog(rs.getLong(1), rs.getString(2), rs.getString(3), rs.getBigDecimal(4)));
             }
         }
         return res;

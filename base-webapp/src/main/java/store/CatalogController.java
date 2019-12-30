@@ -2,7 +2,7 @@ package store;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import ru.geekbrains.ProductRepository;
+import ru.geekbrains.CatalogRepository;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -12,17 +12,17 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.sql.SQLException;
 
-@WebServlet(name = "ProductController", urlPatterns = {"/product", "/create", "/update", "/edit", "/delete"})
-public class ProductController extends HttpServlet {
+@WebServlet(name = "CatalogController", urlPatterns = {"/catalog", "/create", "/update", "/edit", "/delete"})
+public class CatalogController extends HttpServlet {
 
-    private Logger logger = LoggerFactory.getLogger(ProductController.class);
-    private ProductRepository productRepository;
+    private Logger logger = LoggerFactory.getLogger(CatalogController.class);
+    private CatalogRepository catalogRepository;
 
     @Override
     public void init() throws ServletException {
-        this.productRepository = (ProductRepository) getServletContext().getAttribute("productRepository");
-        if (productRepository == null) {
-            throw new ServletException("ProductRepository not created");
+        this.catalogRepository = (CatalogRepository) getServletContext().getAttribute("catalogRepository");
+        if (catalogRepository == null) {
+            throw new ServletException("CatalogRepository not created");
         }
     }
 
@@ -30,9 +30,9 @@ public class ProductController extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try {
             switch (req.getServletPath()) {
-                case "/product":
-                    req.setAttribute("products", productRepository.findAll());
-                    getServletContext().getRequestDispatcher("/product.jsp").forward(req, resp);
+                case "/catalog":
+                    req.setAttribute("products", catalogRepository.findAll());
+                    getServletContext().getRequestDispatcher("/catalog.jsp").forward(req, resp);
                     break;
                 case "/create":
                     showCreateProductPage(req, resp);
@@ -63,7 +63,7 @@ public class ProductController extends HttpServlet {
 
     private void createProduct(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         try {
-            productRepository.insert(new Product(
+            catalogRepository.insert(new Catalog(
                     -1L,
                     req.getParameter("name"),
                     req.getParameter("description"),
@@ -81,7 +81,7 @@ public class ProductController extends HttpServlet {
 
     private void updateProduct(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         try {
-            productRepository.update(new Product(
+            catalogRepository.update(new Catalog(
                     Long.parseLong(req.getParameter("id")),
                     req.getParameter("name"),
                     req.getParameter("description"),
@@ -110,9 +110,9 @@ public class ProductController extends HttpServlet {
             resp.sendError(HttpServletResponse.SC_BAD_REQUEST);
             return;
         }
-        Product product;
+        Catalog product;
         try {
-            product = productRepository.findById(id);
+            product = catalogRepository.findById(id);
         } catch (SQLException ex) {
             logger.error("", ex);
             resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
@@ -124,7 +124,7 @@ public class ProductController extends HttpServlet {
     }
 
     private void showCreateProductPage(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.setAttribute("product", new Product());
+        req.setAttribute("product", new Catalog());
         req.setAttribute("action", "create");
         getServletContext().getRequestDispatcher("/editProduct.jsp").forward(req, resp);
     }
