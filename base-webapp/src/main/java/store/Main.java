@@ -9,7 +9,7 @@ public class Main extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        getServletContext().getRequestDispatcher("/index.html").include(req, resp);
+        getServletContext().getRequestDispatcher("/index.jsp").include(req, resp);
     }
 
 }
