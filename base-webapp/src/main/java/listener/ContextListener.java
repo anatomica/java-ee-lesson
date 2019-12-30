@@ -2,7 +2,7 @@ package listener;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import ru.geekbrains.CatalogRepository;
+import store.CatalogRepository;
 import store.Catalog;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
@@ -36,14 +36,6 @@ public class ContextListener implements ServletContextListener {
             CatalogRepository catalogRepository = new CatalogRepository(conn);
             ctx.setAttribute("connection", conn);
             ctx.setAttribute("catalogRepository", catalogRepository);
-
-            if (catalogRepository.findAll().size() == 0) {
-                catalogRepository.insert(new Catalog(-1L, "Product1", "Desc1", new BigDecimal(10)));
-                catalogRepository.insert(new Catalog(-1L, "Product2", "Desc2", new BigDecimal(20)));
-                catalogRepository.insert(new Catalog(-1L, "Product3", "Desc3", new BigDecimal(30)));
-                catalogRepository.insert(new Catalog(-1L, "Product4", "Desc4", new BigDecimal(40)));
-                catalogRepository.insert(new Catalog(-1L, "Product5", "Desc5", new BigDecimal(50)));
-            }
         } catch (SQLException ex) {
             logger.error("", ex);
         }

@@ -1,6 +1,6 @@
-package ru.geekbrains;
+package store;
 
-import store.Catalog;
+import java.math.BigDecimal;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,6 +12,18 @@ public class CatalogRepository {
     public CatalogRepository(Connection conn) throws SQLException {
         this.conn = conn;
         createTableIfNotExists(conn);
+
+        if (this.findAll().isEmpty()) {
+            this.insert(new Catalog(-1L, "Product1", "Desc1", new BigDecimal(10)));
+            this.insert(new Catalog(-1L, "Product2", "Desc2", new BigDecimal(20)));
+            this.insert(new Catalog(-1L, "Product3", "Desc3", new BigDecimal(30)));
+            this.insert(new Catalog(-1L, "Product4", "Desc4", new BigDecimal(40)));
+            this.insert(new Catalog(-1L, "Product5", "Desc5", new BigDecimal(50)));
+            this.insert(new Catalog(-1L, "Product6", "Desc6", new BigDecimal(60)));
+            this.insert(new Catalog(-1L, "Product7", "Desc7", new BigDecimal(70)));
+            this.insert(new Catalog(-1L, "Product8", "Desc8", new BigDecimal(80)));
+            this.insert(new Catalog(-1L, "Product9", "Desc9", new BigDecimal(90)));
+        }
     }
 
     public void insert(Catalog product) throws SQLException {
