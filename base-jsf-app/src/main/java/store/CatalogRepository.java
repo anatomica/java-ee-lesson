@@ -1,16 +1,27 @@
 package store;
 
+import javax.annotation.PostConstruct;
+import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Inject;
+import javax.inject.Named;
+import javax.servlet.ServletContext;
 import java.math.BigDecimal;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@ApplicationScoped
+@Named
 public class CatalogRepository {
 
-    private final Connection conn;
+    private Connection conn;
 
-    public CatalogRepository(Connection conn) throws SQLException {
-        this.conn = conn;
+    @Inject
+    private ServletContext servletContext;
+
+    @PostConstruct
+    public void init() throws SQLException {
+        this.conn = (Connection) servletContext.getAttribute("connection");
         createTableIfNotExists(conn);
 
         if (this.findAll().isEmpty()) {
@@ -18,11 +29,6 @@ public class CatalogRepository {
             this.insert(new Catalog(-1L, "Product2", "Desc2", new BigDecimal(20)));
             this.insert(new Catalog(-1L, "Product3", "Desc3", new BigDecimal(30)));
             this.insert(new Catalog(-1L, "Product4", "Desc4", new BigDecimal(40)));
-            this.insert(new Catalog(-1L, "Product5", "Desc5", new BigDecimal(50)));
-            this.insert(new Catalog(-1L, "Product6", "Desc6", new BigDecimal(60)));
-            this.insert(new Catalog(-1L, "Product7", "Desc7", new BigDecimal(70)));
-            this.insert(new Catalog(-1L, "Product8", "Desc8", new BigDecimal(80)));
-            this.insert(new Catalog(-1L, "Product9", "Desc9", new BigDecimal(90)));
         }
     }
 

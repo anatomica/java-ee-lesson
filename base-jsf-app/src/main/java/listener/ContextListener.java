@@ -32,9 +32,7 @@ public class ContextListener implements ServletContextListener {
 
         try {
             Connection conn = DriverManager.getConnection(jdbcConnectionString, dbUsername, dbPassword);
-            CatalogRepository catalogRepository = new CatalogRepository(conn);
             ctx.setAttribute("connection", conn);
-            ctx.setAttribute("catalogRepository", catalogRepository);
         } catch (SQLException ex) {
             logger.error("", ex);
         }
