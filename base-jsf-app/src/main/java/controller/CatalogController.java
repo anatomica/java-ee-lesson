@@ -64,6 +64,10 @@ public class CatalogController implements Serializable {
     }
 
     public void addToCart(Catalog catalog) {
-
+        cartController.cart.put(1, catalog);
+        cartController.cart.forEach((k, v) -> {
+            System.out.println(k + ": " + v);
+        });
     }
+
 }
