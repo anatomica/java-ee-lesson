@@ -1,6 +1,7 @@
 package store;
 
 import java.math.BigDecimal;
+import java.util.HashSet;
 
 public class Catalog {
 

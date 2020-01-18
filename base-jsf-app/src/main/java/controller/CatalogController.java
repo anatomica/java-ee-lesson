@@ -4,7 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import store.Catalog;
 import store.CatalogRepository;
-import store.Product;
+
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -24,7 +24,6 @@ public class CatalogController implements Serializable {
     private CartController cartController;
 
     private Catalog catalog;
-    private Product product;
 
     public Catalog getCatalog() {
         return catalog;
@@ -40,7 +39,7 @@ public class CatalogController implements Serializable {
 
     public String createProduct() {
         this.catalog = new Catalog();
-        return "/editProduct.xhtml?faces-redirect=true";
+        return "/product.xhtml?faces-redirect=true";
     }
 
     public String saveProduct() throws SQLException {
@@ -60,7 +59,7 @@ public class CatalogController implements Serializable {
 
     public String editCatalog(Catalog catalog) {
         this.catalog = catalog;
-        return "/editProduct.xhtml?faces-redirect=true";
+        return "/product.xhtml?faces-redirect=true";
     }
 
     public void addToCart(Catalog catalog) {

@@ -86,6 +86,20 @@ public class CatalogRepository {
         return res;
     }
 
+    public List<Catalog> findChosen(List<Catalog> res, ArrayList<Integer> nums) throws SQLException {
+        try (Statement stmt = conn.createStatement()) {
+            ResultSet rs = stmt.executeQuery("select `id`, `name`, `description`, `price` from `products`");
+
+            while (rs.next()) {
+                for (Integer num : nums) {
+                    if (rs.getString(1).equals(String.valueOf(num)))
+                        res.add(new Catalog(rs.getLong(1), rs.getString(2), rs.getString(3), rs.getBigDecimal(4)));
+                }
+            }
+        }
+        return res;
+    }
+
     private void createTableIfNotExists(Connection conn) throws SQLException {
         try (Statement stmt = conn.createStatement()) {
             stmt.execute("create table if not exists `products` (\n" +

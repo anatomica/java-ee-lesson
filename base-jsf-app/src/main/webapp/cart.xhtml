@@ -27,33 +27,33 @@
             <h:form id="productsForm">
                 <div class="row py-2">
                     <div class="col-12">
-                        <h:dataTable value="#{cartController}" var="cartControl"
+                        <h:dataTable value="#{cartController.allCart}" var="cartControl"
                                      styleClass="table table-bordered my-2">
 
                             <h:column>
                                 <f:facet name="header">Id</f:facet>
-                                #{cartControl.cart.get("ID")}
+                                #{cartControl.id}
                             </h:column>
 
                             <h:column>
                                 <f:facet name="header">Name</f:facet>
-                                #{cartControl.cart.get("Name")}
+                                #{cartControl.name}
                             </h:column>
 
                             <h:column>
                                 <f:facet name="header">Description</f:facet>
-                                #{cartControl.cart.get("Description")}
+                                #{cartControl.description}
                             </h:column>
 
                             <h:column>
                                 <f:facet name="header">Price</f:facet>
-                                #{cartControl.cart.get("Price")}
+                                #{cartControl.price}
                             </h:column>
 
                             <h:column>
                                 <f:facet name="header">Actions</f:facet>
                                 <h:commandButton value="Delete" styleClass="btn btn-danger"
-                                                 action="#{cartControl.cart.clear()}"/>
+                                                 action="#{cartController.removeFromCart(cartControl)}"/>
                             </h:column>
                         </h:dataTable>
                     </div>
