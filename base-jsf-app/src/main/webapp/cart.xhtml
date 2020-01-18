@@ -12,7 +12,7 @@
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"/>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"/>
     <link rel="stylesheet" href="style.css"/>
-    <title>Cart</title>
+    <title>Catalog</title>
 </h:head>
 
 <h:body>
@@ -27,39 +27,33 @@
             <h:form id="productsForm">
                 <div class="row py-2">
                     <div class="col-12">
-                        <h:commandButton value="Add Product" styleClass="btn btn-primary" action="#{catalogController.createProduct()}"/>
-                    </div>
-
-                    <div class="col-12">
-                        <h:dataTable value="#{cartController}" var="cart"
+                        <h:dataTable value="#{cartController}" var="cartControl"
                                      styleClass="table table-bordered my-2">
 
                             <h:column>
                                 <f:facet name="header">Id</f:facet>
-                                #{cart.getOrDefault(1, "id")}
+                                #{cartControl.cart.get("ID")}
                             </h:column>
 
                             <h:column>
                                 <f:facet name="header">Name</f:facet>
-                                #{cart.getOrDefault(1, "id"}
+                                #{cartControl.cart.get("Name")}
                             </h:column>
 
                             <h:column>
                                 <f:facet name="header">Description</f:facet>
-                                #{cart.getOrDefault(1, "id"}
+                                #{cartControl.cart.get("Description")}
                             </h:column>
 
                             <h:column>
                                 <f:facet name="header">Price</f:facet>
-                                #{cart.getOrDefault(1, "id"}
+                                #{cartControl.cart.get("Price")}
                             </h:column>
 
                             <h:column>
                                 <f:facet name="header">Actions</f:facet>
-                                <h:commandButton value="Remove" styleClass="btn btn-danger"
-                                                 action="#{cart.clear()}"/>
-                                <!--                                <f:ajax event="click" render="productsForm"/>-->
-                                <!--                            </h:commandButton>-->
+                                <h:commandButton value="Delete" styleClass="btn btn-danger"
+                                                 action="#{cartControl.cart.clear()}"/>
                             </h:column>
                         </h:dataTable>
                     </div>
