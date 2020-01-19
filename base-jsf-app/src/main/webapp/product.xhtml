@@ -30,19 +30,25 @@
                         <div class="form-group">
                             <h:outputLabel value="Name" for="name"/>
                             <h:inputText styleClass="form-control" id="name" name="name" placeholder="Enter Name"
-                                         value="#{catalogController.catalog.name}" required="true" requiredMessage="Name is required"/>
+                                         value="#{catalogController.catalog.name}" required="true" requiredMessage="Name is required">
+                                <f:validateBean />
+                            </h:inputText> <br />
                         </div>
                         <div class="form-group">
                             <h:outputLabel value="Descriptoin" for="description"/>
                             <h:inputText styleClass="form-control" id="description" name="description" placeholder="Enter Description"
-                                         value="#{catalogController.catalog.description}" required="true" requiredMessage="Description is required"/>
+                                         value="#{catalogController.catalog.description}" required="true" requiredMessage="Description is required">
+                                <f:validateBean />
+                            </h:inputText> <br />
                         </div>
                         <div class="form-group">
                             <h:outputLabel value="Price" for="price"/>
                             <h:inputText p:type="number" styleClass="form-control" id="price" name="price" placeholder="Enter Price"
-                                         value="#{catalogController.catalog.price}">
-                                <f:converter converterId="javax.faces.BigDecimal"/>
-                            </h:inputText>
+                                         value="#{catalogController.catalog.price}" validatorMessage="Цена должна быть от 10.00 до 5000.00" >
+                                <f:validateDoubleRange minimum="10.00" maximum="5000.00"/>>
+                                <f:converter converterId="javax.faces.BigDecimal" />
+                                <f:validateBean />
+                            </h:inputText> <br />
                         </div>
                         <h:commandButton value="Submit" styleClass="btn btn-primary" action="#{catalogController.saveProduct()}"/>
                     </h:form>
