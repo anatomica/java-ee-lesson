@@ -4,17 +4,17 @@ import store.Catalog;
 import store.CatalogRepository;
 
 import javax.enterprise.context.ApplicationScoped;
+import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
+import java.io.Serializable;
 import java.math.BigDecimal;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.*;
 
-@ApplicationScoped
+@SessionScoped
 @Named
-public class CartController {
+public class CartController implements Serializable {
 
     private Map<String, HashSet<String>> cart;
     private ArrayList<Integer> nums;
