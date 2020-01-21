@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+    <meta content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"/>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"/>
+    <link rel="stylesheet" href="style.css"/>
+    <title>Cart</title>
+</h:head>
+
+<h:body>
+    <div class="content">
+        <p:tabMenu activeIndex="#{param.i}">
+            <p:menuitem value="Major" outcome="index.xhtml?faces-redirect=true" icon="pi pi-star">
+                <f:param name="i" value="0" />
+            </p:menuitem>
+            <p:menuitem value="Catalog" outcome="catalog.xhtml?faces-redirect=true" icon="pi pi-search">
+                <f:param name="i" value="1" />
+            </p:menuitem>
+            <p:menuitem value="Product" outcome="product.xhtml?faces-redirect=true" icon="pi pi-file">
+                <f:param name="i" value="2" />
+            </p:menuitem>
+            <p:menuitem value="Order" outcome="order.xhtml?faces-redirect=true" icon="pi pi-briefcase">
+                <f:param name="i" value="3" />
+            </p:menuitem>
+            <p:menuitem value="Cart" outcome="cart.xhtml?faces-redirect=true" icon="pi pi-user">
+                <f:param name="i" value="4" />
+            </p:menuitem>
+            <p:menuitem value="Gmap" outcome="Gmap.xhtml" icon="pi pi-user">
+                <f:param name="i" value="5" />
+            </p:menuitem>
+        </p:tabMenu>
+        <div class="container">
+            <h:form id="productsForm">
+                <div class="row py-2">
+                    <div class="col-12">
+                        <h:dataTable value="#{cartController.allCart}" var="cartControl"
+                                     styleClass="table table-bordered my-2">
+
+                            <h:column>
+                                <f:facet name="header">Id</f:facet>
+                                #{cartControl.id}
+                            </h:column>
+
+                            <h:column>
+                                <f:facet name="header">Name</f:facet>
+                                #{cartControl.name}
+                            </h:column>
+
+                            <h:column>
+                                <f:facet name="header">Description</f:facet>
+                                #{cartControl.description}
+                            </h:column>
+
+                            <h:column>
+                                <f:facet name="header">Price</f:facet>
+                                #{cartControl.price}
+                            </h:column>
+
+                            <h:column>
+                                <f:facet name="header">Actions</f:facet>
+                                <h:commandButton value="Delete" styleClass="btn btn-danger"
+                                                 action="#{cartController.removeFromCart(cartControl)}"/>
+                            </h:column>
+                        </h:dataTable>
+                    </div>
+                </div>
+            </h:form>
+        </div>
+    </div>
+
+</h:body>
+</html>
