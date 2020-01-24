@@ -1,5 +1,6 @@
 package controller;
 
+import cart.CartService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import store.Catalog;
@@ -21,7 +22,7 @@ public class CatalogController implements Serializable {
     @Inject
     private CatalogRepository catalogRepository;
     @Inject
-    private CartController cartController;
+    private CartService cartService;
 
     private Catalog catalog;
 
@@ -63,7 +64,8 @@ public class CatalogController implements Serializable {
     }
 
     public void addToCart(Catalog catalog) {
-        cartController.addToCart(catalog);
+        // cartController.addToCart(catalog);
+        cartService.addProductQty(catalog, "Green", 1);
     }
 
 }

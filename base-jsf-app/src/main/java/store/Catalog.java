@@ -3,6 +3,7 @@ package store;
 import javax.inject.Named;
 import javax.validation.constraints.*;
 import java.math.BigDecimal;
+import java.util.Objects;
 
 @Named
 public class Catalog {
@@ -40,4 +41,16 @@ public class Catalog {
     public BigDecimal getPrice() { return price; }
     public void setPrice(BigDecimal price) { this.price = price; }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Catalog catalog = (Catalog) o;
+        return Objects.equals(id, catalog.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
 }
