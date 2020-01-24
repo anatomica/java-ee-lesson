@@ -1,20 +1,30 @@
 package store;
 
 import javax.inject.Named;
+import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.math.BigDecimal;
 import java.util.Objects;
 
-@Named
+@Table(name = "products")
+@Entity
 public class Catalog {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(length = 4096, nullable = false)
     @NotNull (message = "Поле не должно быть пустым")
     @Size (min = 2, max = 20, message = "Поле должно содержать от 4 до 10 символов")
     private String name;
+
+    @Column(length = 10000)
     @NotNull (message = "Поле не должно быть пустым")
     @Size (min = 2, max = 20, message = "Поле должно содержать от 4 до 10 символов")
     private String description;
+
+    @Column
     @NotNull (message = "Поле не должно быть пустым")
     @Digits (integer = 6, fraction = 2)
     private BigDecimal price;

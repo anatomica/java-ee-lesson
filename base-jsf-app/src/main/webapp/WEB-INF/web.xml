@@ -18,19 +18,6 @@
   <welcome-file-list>
     <welcome-file>index.xhtml</welcome-file>
   </welcome-file-list>
-
-  <context-param>
-    <param-name>jdbcConnectionString</param-name>
-    <param-value>jdbc:mysql://localhost:3306/javaee_test_db?createDatabaseIfNotExist=true&amp;allowPublicKeyRetrieval=true&amp;useSSL=false&amp;useUnicode=true&amp;characterEncoding=UTF-8&amp;serverTimezone=UTC</param-value>
-  </context-param>
-  <context-param>
-    <param-name>dbUsername</param-name>
-    <param-value>root</param-value>
-  </context-param>
-  <context-param>
-    <param-name>dbPassword</param-name>
-    <param-value>190283</param-value>
-  </context-param>
   
   <error-page>
     <error-code>403</error-code>
