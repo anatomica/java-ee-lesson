@@ -1,6 +1,7 @@
 package service;
 
 import java.math.BigDecimal;
+import java.util.Objects;
 
 public class CatalogRepeater {
 
@@ -31,4 +32,16 @@ public class CatalogRepeater {
     public BigDecimal getPrice() { return price; }
     public void setPrice(BigDecimal price) { this.price = price; }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        CatalogRepeater that = (CatalogRepeater) o;
+        return Objects.equals(id, that.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
 }

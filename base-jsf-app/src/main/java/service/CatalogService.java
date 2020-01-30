@@ -5,15 +5,15 @@ import java.util.List;
 
 public interface CatalogService {
 
-    void insert(Catalog product);
+    void insert(CatalogRepeater product);
 
-    void update(Catalog product);
+    void update(CatalogRepeater product);
 
     void delete(long id);
 
     Catalog findById(long id);
 
-    List<Catalog> findAll();
+    List<CatalogRepeater> findAll();
 
 
 }

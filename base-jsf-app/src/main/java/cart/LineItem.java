@@ -1,28 +1,27 @@
 package cart;
 
-import store.Catalog;
-
+import service.CatalogRepeater;
 import java.util.Objects;
 
 public class LineItem {
 
-    Catalog catalog;
+    CatalogRepeater product;
     String color;
     Integer qty;
 
     public LineItem() {
     }
 
-    public LineItem(Catalog catalog, String color) {
-        this.catalog = catalog;
+    public LineItem(CatalogRepeater product, String color) {
+        this.product = product;
         this.color = color;
     }
 
-    public Catalog getCatalog() {
-        return catalog;
+    public CatalogRepeater getProduct() {
+        return product;
     }
-    public void setCatalog(Catalog catalog) {
-        this.catalog = catalog;
+    public void setProduct(CatalogRepeater product) {
+        this.product = product;
     }
     public String getColor() {
         return color;
@@ -42,13 +41,12 @@ public class LineItem {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         LineItem lineItem = (LineItem) o;
-        return Objects.equals(catalog, lineItem.catalog) &&
+        return Objects.equals(product, lineItem.product) &&
                 Objects.equals(color, lineItem.color);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(catalog, color);
+        return Objects.hash(product, color);
     }
-
 }

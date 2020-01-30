@@ -1,7 +1,7 @@
 package cart;
 
-import store.Catalog;
-
+import service.CatalogRepeater;
+import javax.ejb.Stateful;
 import javax.ejb.Stateless;
 import java.io.Serializable;
 import java.util.*;
@@ -15,13 +15,13 @@ public class CartService implements Serializable {
         LineItem = new HashMap<>();
     }
 
-    public void addProductQty(Catalog catalog, String color, int qty) {
-        LineItem lineItem = new LineItem(catalog, color);
+    public void addProductQty(CatalogRepeater product, String color, int qty) {
+        LineItem lineItem = new LineItem(product, color);
         LineItem.put(lineItem, LineItem.getOrDefault(lineItem, 0) + qty);
     }
 
-    public void removeProductQty(Catalog catalog, String color, int qty) {
-        LineItem lineItem = new LineItem(catalog, color);
+    public void removeProductQty(CatalogRepeater product, String color, int qty) {
+        LineItem lineItem = new LineItem(product, color);
         int currentQty = LineItem.getOrDefault(lineItem, 0);
         if (currentQty - qty > 0) LineItem.put(lineItem, currentQty - qty);
         else LineItem.remove(lineItem);

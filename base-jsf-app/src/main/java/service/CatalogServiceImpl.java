@@ -15,9 +15,9 @@ public class CatalogServiceImpl implements CatalogService {
     private CatalogRepository catalogRepository;
 
     @Override
-    public List<Catalog> findAll() {
+    public List<CatalogRepeater> findAll() {
         return catalogRepository.findAll().stream().map(product ->
-                new Catalog(
+                new CatalogRepeater(
                         product.getId(),
                         product.getName(),
                         product.getDescription(),
@@ -26,13 +26,23 @@ public class CatalogServiceImpl implements CatalogService {
     }
 
     @Override
-    public void insert (Catalog product) {
-        catalogRepository.insert(product);
+    public void insert (CatalogRepeater product) {
+        Catalog catalog = new Catalog();
+        catalog.setId(product.getId());
+        catalog.setName(product.getName());
+        catalog.setDescription(product.getDescription());
+        catalog.setPrice(product.getPrice());
+        catalogRepository.insert(catalog);
     }
 
     @Override
-    public void update(Catalog product) {
-        catalogRepository.update(product);
+    public void update(CatalogRepeater product) {
+        Catalog catalog = new Catalog();
+        catalog.setId(product.getId());
+        catalog.setName(product.getName());
+        catalog.setDescription(product.getDescription());
+        catalog.setPrice(product.getPrice());
+        catalogRepository.update(catalog);
     }
 
     @Override
