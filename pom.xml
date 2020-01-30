@@ -11,6 +11,7 @@
         <module>base-webapp</module>
         <module>base-jsf-app</module>
         <module>ejb-client</module>
+        <module>web-client</module>
     </modules>
     <packaging>pom</packaging>
 
