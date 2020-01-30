@@ -3,15 +3,13 @@ package controller;
 import cart.CartService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import store.Catalog;
-import store.CatalogRepository;
-
+import service.CatalogRepeater;
+import service.CatalogService;
+import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.event.ComponentSystemEvent;
-import javax.inject.Inject;
 import javax.inject.Named;
 import java.io.Serializable;
-import java.sql.SQLException;
 import java.util.List;
 
 @SessionScoped
@@ -19,57 +17,62 @@ import java.util.List;
 public class CatalogController implements Serializable {
     private static final Logger logger = LoggerFactory.getLogger(CatalogController.class);
 
-    @Inject
-    private CatalogRepository catalogRepository;
-    @Inject
+//    @EJB
+//    private CatalogRepository catalogRepository;
+
+    @EJB
+    private CatalogService catalogService;
+
+    @EJB
     private CartService cartService;
-    private Catalog catalog;
-    private List<Catalog> catalogs;
+
+    private CatalogRepeater product;
+    private List<CatalogRepeater> products;
 
     public void preloadCatalog(ComponentSystemEvent componentSystemEvent) {
-        this.catalogs = catalogRepository.findAll();
+        this.products = catalogService.findAll();
     }
 
-    public Catalog getCatalog() {
-        return catalog;
+    public CatalogRepeater getProduct() {
+        return product;
     }
 
-    public void setCatalog(Catalog catalog) {
-        this.catalog = catalog;
+    public void setProduct(CatalogRepeater product) {
+        this.product = product;
     }
 
-    public List<Catalog> getAllCatalog() {
-        return catalogs;
+    public List<CatalogRepeater> getAllCatalog() {
+        return products;
     }
 
     public String createProduct() {
-        this.catalog = new Catalog();
+        this.product = new CatalogRepeater();
         return "/product.xhtml?faces-redirect=true";
     }
 
     public String saveProduct() {
-        if (catalog.getId() == null) {
-            catalogRepository.insert(catalog);
+        if (product.getId() == null) {
+            catalogService.insert(product);
         } else {
-            catalogRepository.update(catalog);
+            catalogService.update(product);
         }
         return "/catalog.xhtml?faces-redirect=true";
     }
 
-    public void deleteProduct(Catalog catalog) {
-        this.catalog = catalog;
-        catalogRepository.delete(catalog.getId());
+    public void deleteProduct(CatalogRepeater product) {
+        this.product = product;
+        catalogService.delete(product.getId());
         logger.info("Deleting Product");
         // return "/catalog.xhtml?faces-redirect=true";
     }
 
-    public String editCatalog(Catalog catalog) {
-        this.catalog = catalog;
+    public String editCatalog(CatalogRepeater product) {
+        this.product = product;
         return "/product.xhtml?faces-redirect=true";
     }
 
-    public void addToCart(Catalog catalog) {
-        cartService.addProductQty(catalog, "Green", 1);
+    public void addToCart(CatalogRepeater product) {
+        cartService.addProductQty(product, "Green", 1);
     }
 
 }

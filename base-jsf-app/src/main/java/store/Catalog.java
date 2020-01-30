@@ -1,14 +1,14 @@
 package store;
 
-import javax.inject.Named;
 import javax.persistence.*;
 import javax.validation.constraints.*;
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Objects;
 
 @Table(name = "products")
 @Entity
-public class Catalog {
+public class Catalog implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

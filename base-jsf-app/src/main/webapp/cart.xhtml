@@ -46,22 +46,22 @@
 
                             <h:column>
                                 <f:facet name="header">Id</f:facet>
-                                #{item.catalog.id}
+                                #{item.product.id}
                             </h:column>
 
                             <h:column>
                                 <f:facet name="header">Name</f:facet>
-                                #{item.catalog.name}
+                                #{item.product.name}
                             </h:column>
 
                             <h:column>
                                 <f:facet name="header">Description</f:facet>
-                                #{item.catalog.description}
+                                #{item.product.description}
                             </h:column>
 
                             <h:column>
                                 <f:facet name="header">Price</f:facet>
-                                #{item.catalog.price}
+                                #{item.product.price}
                             </h:column>
 
                             <h:column>
@@ -71,15 +71,15 @@
 
                             <h:column>
                                 <f:facet name="header">Price for All</f:facet>
-                                #{item.qty * item.catalog.price}
+                                #{item.qty * item.product.price}
                             </h:column>
 
                             <h:column>
                                 <f:facet name="header">Actions</f:facet>
                                 <h:commandButton value="Delete One" styleClass="btn btn-danger"
-                                                 action="#{cartController.removeLineItem(item.catalog)}"/>
+                                                 action="#{cartController.removeLineItem(item.product)}"/>
                                 <h:commandButton value="Delete All" styleClass="btn btn-danger"
-                                                 action="#{cartController.removeAllLineItem(item.catalog)}"/>
+                                                 action="#{cartController.removeAllLineItem(item.product)}"/>
                             </h:column>
                         </h:dataTable>
                     </div>
