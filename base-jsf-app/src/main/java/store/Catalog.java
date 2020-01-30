@@ -32,6 +32,12 @@ public class Catalog {
     public Catalog() {
     }
 
+    public Catalog(String name, String description, BigDecimal price) {
+        this.name = name;
+        this.description = description;
+        this.price = price;
+    }
+
     public Catalog(Long id, String name, String description, BigDecimal price) {
         this.id = id;
         this.name = name;
