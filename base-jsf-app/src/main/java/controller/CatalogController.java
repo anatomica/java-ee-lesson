@@ -5,13 +5,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import store.Catalog;
 import store.CatalogRepository;
-
+import store.CatalogRepositoryImpl;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.event.ComponentSystemEvent;
 import javax.inject.Inject;
 import javax.inject.Named;
 import java.io.Serializable;
-import java.sql.SQLException;
 import java.util.List;
 
 @SessionScoped
@@ -21,8 +20,10 @@ public class CatalogController implements Serializable {
 
     @Inject
     private CatalogRepository catalogRepository;
+
     @Inject
     private CartService cartService;
+
     private Catalog catalog;
     private List<Catalog> catalogs;
 

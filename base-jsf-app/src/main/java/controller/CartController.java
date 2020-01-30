@@ -3,16 +3,12 @@ package controller;
 import cart.CartService;
 import cart.LineItem;
 import store.Catalog;
-import store.CatalogRepository;
 
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @SessionScoped
 @Named
