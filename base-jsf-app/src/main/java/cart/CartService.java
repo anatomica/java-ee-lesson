@@ -1,12 +1,13 @@
 package cart;
 
 import service.CatalogRepeater;
-import javax.ejb.Stateful;
-import javax.ejb.Stateless;
+import javax.enterprise.context.SessionScoped;
+import javax.inject.Named;
 import java.io.Serializable;
 import java.util.*;
 
-@Stateless
+@SessionScoped
+@Named
 public class CartService implements Serializable {
 
     private Map<LineItem, Integer> LineItem;

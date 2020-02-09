@@ -3,8 +3,8 @@ package controller;
 import cart.CartService;
 import cart.LineItem;
 import service.CatalogRepeater;
-import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
+import javax.inject.Inject;
 import javax.inject.Named;
 import java.io.Serializable;
 import java.util.List;
@@ -13,7 +13,7 @@ import java.util.List;
 @Named
 public class CartController implements Serializable {
 
-    @EJB
+    @Inject
     CartService cartService;
 
     public List<LineItem> getLineItem() {

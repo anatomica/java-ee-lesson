@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Stateless
-// @WebService (endpointInterface = "service.CatalogService", serviceName = "CatalogServiceImpl")
 public class CatalogServiceImpl implements CatalogService {
 
     @EJB

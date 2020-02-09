@@ -8,6 +8,7 @@ import service.CatalogService;
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.event.ComponentSystemEvent;
+import javax.inject.Inject;
 import javax.inject.Named;
 import java.io.Serializable;
 import java.util.List;
@@ -23,7 +24,7 @@ public class CatalogController implements Serializable {
     @EJB
     private CatalogService catalogService;
 
-    @EJB
+    @Inject
     private CartService cartService;
 
     private CatalogRepeater product;
