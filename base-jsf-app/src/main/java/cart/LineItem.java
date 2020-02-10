@@ -1,26 +1,26 @@
 package cart;
 
-import service.CatalogRepeater;
+import service.CatalogRepr;
 import java.util.Objects;
 
 public class LineItem {
 
-    CatalogRepeater product;
+    CatalogRepr product;
     String color;
     Integer qty;
 
     public LineItem() {
     }
 
-    public LineItem(CatalogRepeater product, String color) {
+    public LineItem(CatalogRepr product, String color) {
         this.product = product;
         this.color = color;
     }
 
-    public CatalogRepeater getProduct() {
+    public CatalogRepr getProduct() {
         return product;
     }
-    public void setProduct(CatalogRepeater product) {
+    public void setProduct(CatalogRepr product) {
         this.product = product;
     }
     public String getColor() {

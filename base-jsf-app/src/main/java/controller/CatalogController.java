@@ -3,7 +3,7 @@ package controller;
 import cart.CartService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import service.CatalogRepeater;
+import service.CatalogRepr;
 import service.CatalogService;
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
@@ -27,27 +27,27 @@ public class CatalogController implements Serializable {
     @Inject
     private CartService cartService;
 
-    private CatalogRepeater product;
-    private List<CatalogRepeater> products;
+    private CatalogRepr product;
+    private List<CatalogRepr> products;
 
     public void preloadCatalog(ComponentSystemEvent componentSystemEvent) {
         this.products = catalogService.findAll();
     }
 
-    public CatalogRepeater getProduct() {
+    public CatalogRepr getProduct() {
         return product;
     }
 
-    public void setProduct(CatalogRepeater product) {
+    public void setProduct(CatalogRepr product) {
         this.product = product;
     }
 
-    public List<CatalogRepeater> getAllCatalog() {
+    public List<CatalogRepr> getAllCatalog() {
         return products;
     }
 
     public String createProduct() {
-        this.product = new CatalogRepeater();
+        this.product = new CatalogRepr();
         return "/product.xhtml?faces-redirect=true";
     }
 
@@ -60,19 +60,19 @@ public class CatalogController implements Serializable {
         return "/catalog.xhtml?faces-redirect=true";
     }
 
-    public void deleteProduct(CatalogRepeater product) {
+    public void deleteProduct(CatalogRepr product) {
         this.product = product;
         catalogService.delete(product.getId());
         logger.info("Deleting Product");
         // return "/catalog.xhtml?faces-redirect=true";
     }
 
-    public String editCatalog(CatalogRepeater product) {
+    public String editCatalog(CatalogRepr product) {
         this.product = product;
         return "/product.xhtml?faces-redirect=true";
     }
 
-    public void addToCart(CatalogRepeater product) {
+    public void addToCart(CatalogRepr product) {
         cartService.addProductQty(product, "Green", 1);
     }
 

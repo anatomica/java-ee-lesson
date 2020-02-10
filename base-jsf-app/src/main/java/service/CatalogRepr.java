@@ -3,17 +3,17 @@ package service;
 import java.math.BigDecimal;
 import java.util.Objects;
 
-public class CatalogRepeater {
+public class CatalogRepr {
 
     private Long id;
     private String name;
     private String description;
     private BigDecimal price;
 
-    public CatalogRepeater() {
+    public CatalogRepr() {
     }
 
-    public CatalogRepeater(Long id, String name, String description, BigDecimal price) {
+    public CatalogRepr(Long id, String name, String description, BigDecimal price) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -36,7 +36,7 @@ public class CatalogRepeater {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        CatalogRepeater that = (CatalogRepeater) o;
+        CatalogRepr that = (CatalogRepr) o;
         return Objects.equals(id, that.id);
     }
 

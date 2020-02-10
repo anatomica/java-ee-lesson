@@ -1,5 +1,7 @@
 package store;
 
+import rest.CatalogServiceRs;
+
 import javax.annotation.PostConstruct;
 import javax.ejb.AsyncResult;
 import javax.ejb.Asynchronous;
@@ -15,8 +17,8 @@ import java.util.List;
 import java.util.concurrent.Future;
 
 @Stateless
-@WebService(endpointInterface = "store.CatalogRepositoryWS", serviceName = "CatalogRepositoryWS")
-public class CatalogRepositoryImpl implements CatalogRepository, CatalogRepositoryRemote, CatalogRepositoryWS, Serializable {
+@WebService(endpointInterface = "store.CatalogRepositoryWS", serviceName = "CatalogService")
+public class CatalogRepositoryImpl implements CatalogRepository, CatalogRepositoryRemote, CatalogRepositoryWS, CatalogServiceRs {
 
     @PersistenceContext(unitName = "ds")
     private EntityManager em;

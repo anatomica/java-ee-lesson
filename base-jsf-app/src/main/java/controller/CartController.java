@@ -2,7 +2,7 @@ package controller;
 
 import cart.CartService;
 import cart.LineItem;
-import service.CatalogRepeater;
+import service.CatalogRepr;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -20,11 +20,11 @@ public class CartController implements Serializable {
         return cartService.getLineItem();
     }
 
-    public void removeLineItem(CatalogRepeater product) {
+    public void removeLineItem(CatalogRepr product) {
         cartService.removeProductQty(product, "Green", 1);
     }
 
-    public void removeAllLineItem(CatalogRepeater product) {
+    public void removeAllLineItem(CatalogRepr product) {
         cartService.removeProductQty(product, "Green", 1000);
     }
 }
