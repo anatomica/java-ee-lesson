@@ -4,7 +4,7 @@ import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
 import java.io.IOException;
 
-@WebFilter (urlPatterns = "/*" )
+@WebFilter (urlPatterns = "/other/*" )
 public class HeaderFooterFilter implements Filter {
 
     private transient FilterConfig filterConfig;

@@ -14,14 +14,14 @@ public class Catalog implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(length = 4096, nullable = false)
+    @Column(length = 10000, nullable = false)
     @NotNull (message = "Поле не должно быть пустым")
-    @Size (min = 2, max = 20, message = "Поле должно содержать от 4 до 10 символов")
+    @Size (min = 2, max = 50, message = "Поле должно содержать от 4 до 10 символов")
     private String name;
 
     @Column(length = 10000)
     @NotNull (message = "Поле не должно быть пустым")
-    @Size (min = 2, max = 20, message = "Поле должно содержать от 4 до 10 символов")
+    @Size (min = 2, max = 50, message = "Поле должно содержать от 4 до 10 символов")
     private String description;
 
     @Column

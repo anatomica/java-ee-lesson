@@ -1,3 +1,4 @@
 /.idea/
 /java-ee-lesson.iml
 /base-webapp/target/
+/ejb-client/target/

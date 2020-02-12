@@ -1,10 +1,13 @@
 package store;
 
+import rest.CatalogServiceRs;
+
 import javax.annotation.PostConstruct;
 import javax.ejb.AsyncResult;
 import javax.ejb.Asynchronous;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
+import javax.jws.WebService;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.io.Serializable;
@@ -14,19 +17,20 @@ import java.util.List;
 import java.util.concurrent.Future;
 
 @Stateless
-public class CatalogRepositoryImpl implements CatalogRepository, CatalogRepositoryRemote, Serializable {
+@WebService(endpointInterface = "store.CatalogRepositoryWS", serviceName = "CatalogService")
+public class CatalogRepositoryImpl implements CatalogRepository, CatalogRepositoryRemote, CatalogRepositoryWS, CatalogServiceRs {
 
     @PersistenceContext(unitName = "ds")
     private EntityManager em;
 
     @PostConstruct
     public void init() {
-        if (this.findAll().isEmpty()) {
-            insert(new Catalog("Product1", "Desc1", new BigDecimal(10)));
-            insert(new Catalog("Product2", "Desc2", new BigDecimal(20)));
-            insert(new Catalog("Product3", "Desc3", new BigDecimal(30)));
-            insert(new Catalog("Product4", "Desc4", new BigDecimal(40)));
-        }
+//        if (this.findAll().isEmpty()) {
+//            insert(new Catalog("Product1", "Desc1", new BigDecimal(10)));
+//            insert(new Catalog("Product2", "Desc2", new BigDecimal(20)));
+//            insert(new Catalog("Product3", "Desc3", new BigDecimal(30)));
+//            insert(new Catalog("Product4", "Desc4", new BigDecimal(40)));
+//        }
     }
 
     @TransactionAttribute

@@ -1,0 +1,30 @@
+GET http://127.0.0.1:8080/base-jsf-app/api/products/all
+
+###
+
+DELETE http://127.0.0.1:8080/base-jsf-app/api/products/4/id
+
+###
+
+PUT http://127.0.0.1:8080/base-jsf-app/api/products/new
+Content-Type: application/json
+
+{
+  "description": "Created from REST call",
+  "name": "Rest product",
+  "price": 40.00
+}
+
+###
+
+POST http://127.0.0.1:8080/base-jsf-app/api/products/update
+Content-Type: application/json
+
+{
+  "description": "Created from REST call",
+  "id": 14,
+  "name": "Updated Rest product",
+  "price": 40.00
+}
+
+###
