@@ -2,7 +2,6 @@ package store;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
 import javax.persistence.EntityManager;
@@ -15,7 +14,6 @@ import java.io.Serializable;
 import java.util.List;
 
 @Stateless
-//@TransactionManagement(javax.ejb.TransactionManagementType.BEAN)
 public class UserRepository implements Serializable {
 
     private Logger logger = LoggerFactory.getLogger(UserRepository.class);
@@ -32,7 +30,7 @@ public class UserRepository implements Serializable {
     }
 
     @TransactionAttribute
-    public void delete(Long id) {
+    public void delete(int id) {
         logger.info("Deleting user");
 
         try {
@@ -41,18 +39,16 @@ public class UserRepository implements Serializable {
                 em.remove(attached);
             }
         } catch (Exception ex) {
-            logger.error("Error with entity class" , ex);
+            logger.error("Error with entity class", ex);
             throw new IllegalStateException(ex);
         }
     }
 
-    @TransactionAttribute
-    public User findById(Long id) {
+    public User findById(int id) {
         return em.find(User.class, id);
     }
 
-    @TransactionAttribute
-    public boolean existsById(Long id) {
+    public boolean existsById(int id) {
         return findById(id) != null;
     }
 
@@ -64,7 +60,14 @@ public class UserRepository implements Serializable {
         from.fetch("roles", JoinType.LEFT);
         query.select(from).distinct(true);
 
-        List<User> resultList = em.createQuery(query).getResultList();
-        return resultList;
+        return em.createQuery(query).getResultList();
+
+//        return em.createQuery("select distinct u from User u left join fetch u.roles", User.class)
+//                .getResultList();
+    }
+
+    public long getCount() {
+        return em.createQuery("select count(*) from User", Long.class)
+                .getSingleResult();
     }
 }

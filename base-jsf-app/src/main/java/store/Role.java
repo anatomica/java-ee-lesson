@@ -1,9 +1,9 @@
 package store;
 
+import service.RoleRepr;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
-import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -16,17 +16,23 @@ public class Role implements Serializable {
     private long id;
 
     @NotNull
-    @Column(name = "name", nullable = false)
+    @Column(name = "name")
     private String name;
 
     @ManyToMany(mappedBy = "roles")
     private Set<User> users;
 
     public Role() {
+
     }
 
     public Role(@NotNull String name) {
         this.name = name;
+    }
+
+    public Role(RoleRepr r) {
+        this.id = r.getId();
+        this.name = r.getName();
     }
 
     public long getId() {
@@ -53,21 +59,5 @@ public class Role implements Serializable {
         this.users = users;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Role role = (Role) o;
-        return Objects.equals(name, role.name);
-    }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(name);
-    }
-
-    @Override
-    public String toString() {
-        return name;
-    }
 }

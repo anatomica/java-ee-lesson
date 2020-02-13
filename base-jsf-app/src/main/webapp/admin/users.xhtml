@@ -4,80 +4,78 @@
       xmlns:ui="http://java.sun.com/jsf/facelets">
 
 <h:head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8"/>
+    <meta content="text/html; charset=UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
-
-    <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"/>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"/>
-    <title>ToDo list application</title>
+    <title>Users</title>
+<!--    <ui:include src="/new_menu.xhtml"/>-->
 </h:head>
 
 <h:body>
-<!--    <ui:include src="/new_menu.xhtml"/>-->
-    <nav class="navbar navbar-light bg-light">
-        <a class="navbar-brand" href="#">Users</a>
 
+    <f:event listener="${userController.preLoad()}" type="preRenderView" />
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <h:link styleClass="nav-link" outcome="/index">Major page</h:link>
+            </li>
+            <li class="nav-item">
+                <h:link styleClass="nav-link" outcome="/catalog">Catalog</h:link>
+            </li>
+            <li class="nav-item">
+                <h:link styleClass="nav-link" outcome="users">Users</h:link>
+            </li>
+            <li class="nav-item">
+                <h:link styleClass="nav-link" outcome="roles">Roles</h:link>
+            </li>
+        </ul>
+        </div>
         <h:form class="form-inline my-2 my-lg-0">
             <h:outputText rendered="#{not empty request.remoteUser}"
                           value="Current user: #{request.remoteUser} "/>
 
             <h:commandLink rendered="#{not empty request.remoteUser}"
-                           action="#{usersController.logout}"
+                           action="#{userController.logout}"
                            class="btn btn-outline-success my-2 my-sm-0">Logout</h:commandLink>
         </h:form>
     </nav>
 
     <div class="container">
+        <div class="row py-2">
+            <h:form id="productsForm">
+                <div class="col-12">
+                    <h:commandButton value="Add user" styleClass="btn btn-primary"
+                                     action="#{userController.createUser()}"/>
+                </div>
 
-        <h:form id="usersForm">
-
-            <h:commandButton value="New" action="#{usersController.createUser()}" styleClass="mt-1 mb-1" />
-
-            <table class="table">
-                <thead class="thead-dark">
-                <tr>
-                    <th>Id</th>
-                    <th>Name</th>
-                    <th>Actions</th>
-                </tr>
-                </thead>
-
-                <ui:repeat value="#{usersController.allUsers}" var="user">
-                    <tr>
-                        <td>
-                            <h:outputText value="#{user.id}"/>
-                        </td>
-
-                        <td>
-                            <h:outputText value="#{user.login}"/>
-                        </td>
-
-                        <td>
-                            <h:commandButton value="Edit" action="#{usersController.editUser(user)}" styleClass="mr-1" />
-                            <h:commandButton value="Delete" action="#{usersController.deleteUser(user)}">
-                                <f:ajax render="usersForm" />
+                <div class="col-12">
+                    <h:dataTable value="#{userController.allUsers}" var="user"
+                                 styleClass="table table-bordered my-2">
+                        <h:column>
+                            <f:facet name="header">Id</f:facet>
+                            #{user.id}
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">Login</f:facet>
+                            #{user.login}
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">Action</f:facet>
+                            <h:commandButton value="Edit" action="#{userController.editUser(user)}"
+                                             styleClass="mr-1"/>
+                            <h:commandButton value="Delete" action="#{userController.deleteUser(user)}">
+                                <f:ajax event="click" render="productsForm"/>
                             </h:commandButton>
-                        </td>
-                    </tr>
-                </ui:repeat>
-            </table>
-        </h:form>
+                        </h:column>
+                    </h:dataTable>
+                </div>
+            </h:form>
+        </div>
     </div>
 
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-            crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-            crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-            crossorigin="anonymous"></script>
 </h:body>
-
 </html>

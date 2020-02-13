@@ -33,7 +33,7 @@
     <realm-name>RealmUsersRoles</realm-name>
     <form-login-config>
       <form-login-page>/login.xhtml</form-login-page>
-      <form-error-page>/WEB-INF/error.jsp</form-error-page>
+      <form-error-page>/WEB-INF/error.html</form-error-page>
     </form-login-config>
   </login-config>
 

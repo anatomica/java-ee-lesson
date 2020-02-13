@@ -1,7 +1,9 @@
 package store;
 
+import service.UserRepr;
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -10,7 +12,7 @@ public class User implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private int id;
 
     @Column(name = "login", unique = true, nullable = false)
     private String login;
@@ -31,13 +33,21 @@ public class User implements Serializable {
     public User() {
     }
 
-    public User(Long id, String login, String password) {
+    public User(int id, String login, String password) {
         this.id = id;
         this.login = login;
         this.password = password;
     }
 
-    public Long getId() {
+    public User(UserRepr user) {
+        this.id = user.getId();
+        this.login = user.getLogin();
+        this.password = user.getPassword();
+        this.roles = new HashSet<>();
+        user.getRoles().forEach(r -> roles.add(new Role(r)));
+    }
+
+    public int getId() {
         return id;
     }
 
@@ -49,7 +59,7 @@ public class User implements Serializable {
         return password;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
