@@ -1,11 +1,13 @@
 package controller;
 
+import cart.CartService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import store.Catalog;
 import store.CatalogRepository;
 
 import javax.enterprise.context.SessionScoped;
+import javax.faces.event.ComponentSystemEvent;
 import javax.inject.Inject;
 import javax.inject.Named;
 import java.io.Serializable;
@@ -15,15 +17,18 @@ import java.util.List;
 @SessionScoped
 @Named
 public class CatalogController implements Serializable {
-
     private static final Logger logger = LoggerFactory.getLogger(CatalogController.class);
 
     @Inject
     private CatalogRepository catalogRepository;
     @Inject
-    private CartController cartController;
-
+    private CartService cartService;
     private Catalog catalog;
+    private List<Catalog> catalogs;
+
+    public void preloadCatalog(ComponentSystemEvent componentSystemEvent) {
+        this.catalogs = catalogRepository.findAll();
+    }
 
     public Catalog getCatalog() {
         return catalog;
@@ -33,8 +38,8 @@ public class CatalogController implements Serializable {
         this.catalog = catalog;
     }
 
-    public List<Catalog> getAllCatalog() throws SQLException {
-        return catalogRepository.findAll();
+    public List<Catalog> getAllCatalog() {
+        return catalogs;
     }
 
     public String createProduct() {
@@ -42,7 +47,7 @@ public class CatalogController implements Serializable {
         return "/product.xhtml?faces-redirect=true";
     }
 
-    public String saveProduct() throws SQLException {
+    public String saveProduct() {
         if (catalog.getId() == null) {
             catalogRepository.insert(catalog);
         } else {
@@ -51,9 +56,10 @@ public class CatalogController implements Serializable {
         return "/catalog.xhtml?faces-redirect=true";
     }
 
-    public void deleteProduct(Catalog catalog) throws SQLException {
-        logger.info("Deleting Product");
+    public void deleteProduct(Catalog catalog) {
+        this.catalog = catalog;
         catalogRepository.delete(catalog.getId());
+        logger.info("Deleting Product");
         // return "/catalog.xhtml?faces-redirect=true";
     }
 
@@ -63,7 +69,7 @@ public class CatalogController implements Serializable {
     }
 
     public void addToCart(Catalog catalog) {
-        cartController.addToCart(catalog);
+        cartService.addProductQty(catalog, "Green", 1);
     }
 
 }

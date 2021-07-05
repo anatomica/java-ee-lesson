@@ -41,33 +41,45 @@
             <h:form id="productsForm">
                 <div class="row py-2">
                     <div class="col-12">
-                        <h:dataTable value="#{cartController.allCart}" var="cartControl"
+                        <h:dataTable value="#{cartController.lineItem}" var="item"
                                      styleClass="table table-bordered my-2">
 
                             <h:column>
                                 <f:facet name="header">Id</f:facet>
-                                #{cartControl.id}
+                                #{item.catalog.id}
                             </h:column>
 
                             <h:column>
                                 <f:facet name="header">Name</f:facet>
-                                #{cartControl.name}
+                                #{item.catalog.name}
                             </h:column>
 
                             <h:column>
                                 <f:facet name="header">Description</f:facet>
-                                #{cartControl.description}
+                                #{item.catalog.description}
                             </h:column>
 
                             <h:column>
                                 <f:facet name="header">Price</f:facet>
-                                #{cartControl.price}
+                                #{item.catalog.price}
+                            </h:column>
+
+                            <h:column>
+                                <f:facet name="header">Quantity</f:facet>
+                                #{item.qty}
+                            </h:column>
+
+                            <h:column>
+                                <f:facet name="header">Price for All</f:facet>
+                                #{item.qty * item.catalog.price}
                             </h:column>
 
                             <h:column>
                                 <f:facet name="header">Actions</f:facet>
-                                <h:commandButton value="Delete" styleClass="btn btn-danger"
-                                                 action="#{cartController.removeFromCart(cartControl)}"/>
+                                <h:commandButton value="Delete One" styleClass="btn btn-danger"
+                                                 action="#{cartController.removeLineItem(item.catalog)}"/>
+                                <h:commandButton value="Delete All" styleClass="btn btn-danger"
+                                                 action="#{cartController.removeAllLineItem(item.catalog)}"/>
                             </h:column>
                         </h:dataTable>
                     </div>

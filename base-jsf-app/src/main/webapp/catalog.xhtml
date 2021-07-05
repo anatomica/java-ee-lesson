@@ -16,6 +16,9 @@
 </h:head>
 
 <h:body>
+
+    <f:event listener="${catalogController.preloadCatalog}" type="preRenderView" />
+
 <div class="content">
             <p:tabMenu activeIndex="#{param.i}">
                 <p:menuitem value="Major" outcome="index.xhtml?faces-redirect=true" icon="pi pi-star">
@@ -37,8 +40,9 @@
                     <f:param name="i" value="5" />
                 </p:menuitem>
             </p:tabMenu>
+
     <div class="container">
-        <h:form id="productsForm">
+        <h:form id="productForm">
             <div class="row py-2">
                 <div class="col-12">
                     <h:commandButton value="Add Product" styleClass="btn btn-primary" action="#{catalogController.createProduct()}"/>
@@ -76,23 +80,24 @@
                                              action="#{catalogController.editCatalog(catalog)}"/>
                             <h:commandButton value="Delete" styleClass="btn btn-danger"
                                              action="#{catalogController.deleteProduct(catalog)}"/>
-<!--                                <f:ajax event="click" render="productsForm"/>-->
+<!--                                <f:ajax event="click" render="productForm"/>-->
 <!--                            </h:commandButton>-->
                         </h:column>
+
                     </h:dataTable>
                 </div>
-                <p:growl id="message" showDetail="true" />
 
+                <p:growl id="message" showDetail="true" />
                 <p:commandButton value="Destroy the World" action="#{dialogView.destroyWorld}" update="message">
                     <p:confirm header="Confirmation" message="Are you sure?" icon="pi pi-exclamation-triangle" />
                 </p:commandButton>
-
                 <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
                     <p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" icon="pi pi-check"
                                      action="#{catalogController.createProduct()}"/>
                     <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="pi pi-times"
                                      action="#{catalogController.createProduct()}"/>
                 </p:confirmDialog>
+
             </div>
         </h:form>
     </div>
