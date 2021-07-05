@@ -25,6 +25,12 @@
 
     <dependencies>
         <dependency>
+            <groupId>org.wildfly</groupId>
+            <artifactId>wildfly-jms-client-bom</artifactId>
+            <type>pom</type>
+            <version>20.0.1.Final</version>
+        </dependency>
+        <dependency>
             <groupId>java-ee-lesson</groupId>
             <artifactId>base-jsf-app</artifactId>
             <version>1.0-SNAPSHOT</version>
@@ -34,7 +40,7 @@
         <dependency>
             <groupId>org.wildfly</groupId>
             <artifactId>wildfly-ejb-client-bom</artifactId>
-            <version>17.0.1.Final</version>
+            <version>20.0.1.Final</version>
             <type>pom</type>
         </dependency>
         <dependency>

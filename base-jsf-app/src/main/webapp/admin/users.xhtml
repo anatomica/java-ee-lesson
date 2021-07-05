@@ -1,0 +1,81 @@
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+    <meta content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"/>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"/>
+    <title>Users</title>
+<!--    <ui:include src="/new_menu.xhtml"/>-->
+</h:head>
+
+<h:body>
+
+    <f:event listener="${userController.preLoad()}" type="preRenderView" />
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <h:link styleClass="nav-link" outcome="/index">Major page</h:link>
+            </li>
+            <li class="nav-item">
+                <h:link styleClass="nav-link" outcome="/catalog">Catalog</h:link>
+            </li>
+            <li class="nav-item">
+                <h:link styleClass="nav-link" outcome="users">Users</h:link>
+            </li>
+            <li class="nav-item">
+                <h:link styleClass="nav-link" outcome="roles">Roles</h:link>
+            </li>
+        </ul>
+        </div>
+        <h:form class="form-inline my-2 my-lg-0">
+            <h:outputText rendered="#{not empty request.remoteUser}"
+                          value="Current user: #{request.remoteUser} "/>
+
+            <h:commandLink rendered="#{not empty request.remoteUser}"
+                           action="#{userController.logout}"
+                           class="btn btn-outline-success my-2 my-sm-0">Logout</h:commandLink>
+        </h:form>
+    </nav>
+
+    <div class="container">
+        <div class="row py-2">
+            <h:form id="productsForm">
+                <div class="col-12">
+                    <h:commandButton value="Add user" styleClass="btn btn-primary"
+                                     action="#{userController.createUser()}"/>
+                </div>
+
+                <div class="col-12">
+                    <h:dataTable value="#{userController.allUsers}" var="user"
+                                 styleClass="table table-bordered my-2">
+                        <h:column>
+                            <f:facet name="header">Id</f:facet>
+                            #{user.id}
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">Login</f:facet>
+                            #{user.login}
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">Action</f:facet>
+                            <h:commandButton value="Edit" action="#{userController.editUser(user)}"
+                                             styleClass="mr-1"/>
+                            <h:commandButton value="Delete" action="#{userController.deleteUser(user)}">
+                                <f:ajax event="click" render="productsForm"/>
+                            </h:commandButton>
+                        </h:column>
+                    </h:dataTable>
+                </div>
+            </h:form>
+        </div>
+    </div>
+
+</h:body>
+</html>
